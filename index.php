@@ -79,7 +79,7 @@
       fetch('data.php')
         .then(response => response.json())
         .then(data => {
-          const categories = data.map(row => row.date);
+          const categories = data.map(row => row.hour);
           const co2Data = data.map(row => row.avg_co2);
           const tvocData = data.map(row => row.avg_tvoc);
 
