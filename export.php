@@ -1,10 +1,10 @@
 <?php
 // ข้อมูลการเชื่อมต่อฐานข้อมูล
-$host = "irkm0xtlo2pcmvvz.chr7pe7iynqr.eu-west-1.rds.amazonaws.com"; // MySQL Hostname
-$username = "atr8951bo6cc30cs"; // MySQL Username
-$password = "qs7uojv84spfdsv6"; // MySQL Password
-$dbname = "g01br52t9mmmpfah"; // ชื่อฐานข้อมูล (เปลี่ยน XXX เป็นชื่อฐานข้อมูลจริง)
-$port = 3306; // MySQL Port (ค่าเริ่มต้นคือ 3306)
+$host = "localhost";
+$username = "root";
+$password = "zong2411";
+$dbname = "project_co2";
+$port = 3306; // MySQL Port
 
 // สร้างการเชื่อมต่อ
 $conn = new mysqli($host, $username, $password, $dbname, $port);
@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 
 // ตั้งค่าหัวข้อ CSV
 header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename=data.csv');
+header('Content-Disposition: attachment; filename=co2_data.csv');
 
 // เปิด output stream
 $output = fopen('php://output', 'w');
@@ -25,10 +25,10 @@ if (!$output) {
 }
 
 // เขียนหัวข้อคอลัมน์
-fputcsv($output, array('BPM', 'Spo2', 'Date', 'Status')); // เปลี่ยนชื่อคอลัมน์ตามฐานข้อมูลของคุณ
+fputcsv($output, array('ID', 'Co2', 'Tvoc', 'Date_Time', 'Status'));
 
 // ดึงข้อมูลจากฐานข้อมูล
-$sql = "SELECT BPM, Spo2, Date, Status FROM oxy_table"; // แก้ไขตามตารางในฐานข้อมูลของคุณ
+$sql = "SELECT ID, Co2, Tvoc, Date_Time, status FROM co2_data";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -38,10 +38,10 @@ if ($result->num_rows > 0) {
     }
 } else {
     // หากไม่มีข้อมูล
-    echo "No data found";
+    fputcsv($output, array("No data found"));
 }
 
-// ปิดการเชื่อมต่อฐานข้อมูล
+// ปิดการเชื่อมต่อ
 $conn->close();
 fclose($output);
 ?>

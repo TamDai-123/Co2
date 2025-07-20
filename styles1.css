@@ -34,16 +34,35 @@
   
   .status-box {
     display: inline-block;
-    background-color: rgb(3, 196, 9); /* สีเขียว */
-    color: white;
-    padding: 5px 10px; /* ระยะห่างด้านใน */
-    border-radius: 20px; /* ความโค้งของขอบ */
+    padding: 5px 10px;
+    border-radius: 20px;
     font-size: 14px;
     font-family: Arial, sans-serif;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* เงา */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: white; /* default text color */
   }
-  
+  .green {
+  background-color: rgb(3, 196, 9); /* เขียวเข้ม */
+  }
+
+  .lime {
+    background-color: #CDDC39;
+    color: black;
+  }
+
+  .yellow {
+    background-color: #FFEB3B;
+    color: black;
+  }
+
+  .orange {
+    background-color: #FF9800;
+  }
+
+  .red {
+    background-color: #F44336;
+  }
   .logo_position {
     position: relative;
     right: 20%;
