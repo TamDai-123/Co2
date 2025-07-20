@@ -20,6 +20,8 @@ $sql = "SELECT
         ORDER BY Date_Time DESC 
         LIMIT 1";
 
+$result = $conn->query($sql);  // <-- เพิ่มบรรทัดนี้
+
 if ($row = $result->fetch_assoc()) {
     echo json_encode([
         'co2' => $row['Co2'],
