@@ -8,10 +8,10 @@ $password = "et7jdh15ukis1krh";
 $dbname = "cza3tygsyezpf1wf";
 $port = 3306; // MySQL Port
 
-$conn = new mysqli($host, $user, $password, $dbname);
+$conn = new mysqli($host, $username, $password, $dbname, $port);
 if ($conn->connect_error) {
     http_response_code(500);
-    echo json_encode(["error" => "Database connection failed."]);
+    echo json_encode(["error" => "Database connection failed: " . $conn->connect_error]);
     exit;
 }
 
@@ -28,6 +28,12 @@ ORDER BY hour ASC
 ";
 
 $result = $conn->query($sql);
+
+if (!$result) {
+    http_response_code(500);
+    echo json_encode(["error" => "Query failed: " . $conn->error]);
+    exit;
+}
 
 $data = [];
 while ($row = $result->fetch_assoc()) {
