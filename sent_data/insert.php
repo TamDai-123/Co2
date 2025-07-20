@@ -1,8 +1,10 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "zong2411";
-$dbname = "project_co2";
+// ข้อมูลการเชื่อมต่อฐานข้อมูล
+$host = "cvktne7b4wbj4ks1.chr7pe7iynqr.eu-west-1.rds.amazonaws.com";
+$username = "vcd4hvgvbnfmihrx";
+$password = "et7jdh15ukis1krh";
+$dbname = "cza3tygsyezpf1wf";
+$port = 3306; // MySQL Port
 
 // รับค่าจาก POST
 $co2 = isset($_POST['co2']) ? $_POST['co2'] : null;
