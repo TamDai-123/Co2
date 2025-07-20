@@ -19,8 +19,8 @@ if ($conn->connect_error) {
 $sql = "
 SELECT 
     DATE_FORMAT(Date_Time, '%Y-%m-%d %H:00:00') as hour,
-    AVG(Co2) as avg_co2,
-    AVG(TVOC) as avg_tvoc
+    ROUND(AVG(Co2), 2) as avg_co2,
+    ROUND(AVG(TVOC), 2) as avg_tvoc
 FROM co2_data
 WHERE Date_Time >= NOW() - INTERVAL 24 HOUR
 GROUP BY hour

@@ -11,8 +11,14 @@ if ($conn->connect_error) {
     die(json_encode(['error' => 'Database connection failed']));
 }
 
-$sql = "SELECT Co2, Tvoc, status, Date_Time FROM co2_data ORDER BY Date_Time DESC LIMIT 1";
-$result = $conn->query($sql);
+$sql = "SELECT 
+            ROUND(Co2, 2) AS Co2, 
+            ROUND(Tvoc, 2) AS Tvoc, 
+            status, 
+            Date_Time 
+        FROM co2_data 
+        ORDER BY Date_Time DESC 
+        LIMIT 1";
 
 if ($row = $result->fetch_assoc()) {
     echo json_encode([
