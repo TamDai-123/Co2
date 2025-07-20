@@ -6,6 +6,9 @@ $password = "et7jdh15ukis1krh";
 $dbname = "cza3tygsyezpf1wf";
 $port = 3306; // MySQL Port
 
+// ตั้งค่า Timezone เป็นของไทย
+date_default_timezone_set('Asia/Bangkok');
+
 // รับค่าจาก POST
 $co2 = isset($_POST['co2']) ? $_POST['co2'] : null;
 $tvoc = isset($_POST['tvoc']) ? $_POST['tvoc'] : null;
@@ -17,16 +20,19 @@ if (!is_numeric($co2) || !is_numeric($tvoc)) {
 }
 
 // เชื่อมต่อ MySQL
-$conn = new mysqli($host, $username, $password, $dbname);
+$conn = new mysqli($host, $username, $password, $dbname, $port);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// บันทึกข้อมูล
-$sql = "INSERT INTO co2_data (Co2, Tvoc) VALUES ($co2, $tvoc)";
+// สร้างวันที่และเวลาปัจจุบันของไทย
+$datetime = date('Y-m-d H:i:s');
+
+// บันทึกข้อมูลพร้อมเวลา
+$sql = "INSERT INTO co2_data (Co2, Tvoc, Date_Time) VALUES ($co2, $tvoc, '$datetime')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    echo "New record created successfully at $datetime";
 } else {
     echo "Error: " . $conn->error;
 }
